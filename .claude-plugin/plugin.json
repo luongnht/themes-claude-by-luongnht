@@ -1,7 +1,7 @@
 {
   "name": "phong-canh",
-  "version": "0.1.0",
-  "description": "Năm cảnh nền pixel và halftone cho khung chat Claude Code, đổi bằng /giao-dien, có pháo hoa khi commit, merge hoặc bấm vào nền, và vệt chấm sáng theo chuột",
+  "version": "0.2.0",
+  "description": "Mười cảnh nền pixel và halftone cho khung chat Claude Code, đổi bằng /giao-dien, có pháo hoa khi commit, merge hoặc bấm vào nền, và vệt chấm sáng theo chuột",
   "author": { "name": "luongnht" },
   "license": "MIT",
   "types": "./types/index.d.ts"

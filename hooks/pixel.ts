@@ -2,7 +2,7 @@
 // Every scene is 1600 x 1000, sliced to fill the window, with its subject
 // kept to the edges and corners so the words in the middle stay clear.
 
-const rng = (start: number) => {
+export const rng = (start: number) => {
   let s = start
 
   return () => {
@@ -11,10 +11,10 @@ const rng = (start: number) => {
     return (s - 1) / 2147483646
   }
 }
-const n = (v: number) => Math.round(v * 10) / 10
+export const n = (v: number) => Math.round(v * 10) / 10
 
 // One path from a grid of cells: each row's runs become one rectangle.
-const cells = (cols: number, rows: number, b: number, ox: number, oy: number, inside: (i: number, j: number) => boolean) => {
+export const cells = (cols: number, rows: number, b: number, ox: number, oy: number, inside: (i: number, j: number) => boolean) => {
   let d = ''
 
   for (let j = 0; j < rows; j++) {
@@ -38,7 +38,7 @@ const cells = (cols: number, rows: number, b: number, ox: number, oy: number, in
 }
 
 // A sprite from rows of letters: each letter a class, '.' empty.
-const sprite = (rows: string[], b: number, cls: Record<string, string>) => {
+export const sprite = (rows: string[], b: number, cls: Record<string, string>) => {
   let out = ''
 
   for (const key of Object.keys(cls)) {
@@ -53,7 +53,7 @@ const sprite = (rows: string[], b: number, cls: Record<string, string>) => {
 }
 
 // Pixel stars that twinkle in steps, as old screens do.
-const pixelStars = (seed: number, count: number, maxY: number, size: number) => {
+export const pixelStars = (seed: number, count: number, maxY: number, size: number) => {
   const r = rng(seed)
   let out = ''
 
@@ -67,7 +67,7 @@ const pixelStars = (seed: number, count: number, maxY: number, size: number) => 
 }
 
 // A stepped ridge along the bottom.
-const ridge = (seed: number, base: number, rough: number, step: number, cls: string) => {
+export const ridge = (seed: number, base: number, rough: number, step: number, cls: string) => {
   const r = rng(seed)
   let d = `M-40 1000V${base}`
   let y = base
@@ -87,7 +87,7 @@ const PIXEL_BASE = `
 @keyframes blink { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.75; } }
 `
 
-const open = (style: string) =>
+export const open = (style: string) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges"><style>${PIXEL_BASE}${style}</style>`
 
 // 1. Halftone dusk: a sun of dots sinking in the corner, dotted haze drifting.
@@ -186,7 +186,7 @@ const pine = (cx: number, ground: number, b: number, tiers: number, cls: string,
   return `<path class="${cls}" d="${body}"/><path class="${snow}" d="${caps}"/>`
 }
 
-const snowTile = (seed: number, w: number, h: number, count: number, size: number) => {
+export const snowTile = (seed: number, w: number, h: number, count: number, size: number) => {
   const r = rng(seed)
   let out = ''
 

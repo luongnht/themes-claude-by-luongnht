@@ -1,6 +1,6 @@
 # Phong cảnh: giao diện cho Claude Code
 
-Năm cảnh nền động cho khung chat của Claude Code trên app desktop và mobile, vẽ theo kiểu pixel và halftone. Vật thể nhỏ, nằm sát mép và chuyển động chậm, để khung chat vẫn là trọng tâm.
+Mười cảnh nền động cho khung chat của Claude Code trên app desktop và mobile, vẽ theo kiểu pixel và halftone. Vật thể nhỏ, nằm sát mép và chuyển động chậm, để khung chat vẫn là trọng tâm.
 
 | Số | Cảnh | Mô tả |
 | --- | --- | --- |
@@ -9,6 +9,11 @@ Năm cảnh nền động cho khung chat của Claude Code trên app desktop và
 | 3 | Synthwave | Mặt trời sọc neon, lưới phát sáng (chỉ có chế độ tối) |
 | 4 | Đại dương | Rùa biển pixel bơi ngang, bầy cá, bong bóng |
 | 5 | Cực quang | Cực quang nhiều lớp, núi, sao băng |
+| 6 | Trời xanh mây trắng | Mây pixel trôi, đàn chim nhỏ; tối là chạng vạng hồng |
+| 7 | Thành phố đêm mưa | Nhà cao tầng hai bên, cửa sổ sáng đèn, mưa thưa |
+| 8 | Hoa anh đào | Cành hoa ở hai góc trên, cánh hoa rơi |
+| 9 | Mùa thu lá rơi | Cây tròn ở góc, đồi ấm, lá phong rơi |
+| 10 | Vũ trụ | Hành tinh có vành, mặt trăng nhỏ, sao chổi (chỉ có chế độ tối) |
 
 ## Cài đặt
 
@@ -30,7 +35,7 @@ Trong app desktop (nơi `/plugin` không chạy): bấm dấu + cạnh ô nhập
 
 ## Cách dùng
 
-- Đổi cảnh: `/giao-dien 1` đến `/giao-dien 5`, hoặc gõ tên như `/giao-dien dai-duong`. Gõ `/giao-dien` không kèm gì để xem danh sách. Cảnh đã chọn được nhớ cho các phiên sau.
+- Đổi cảnh: `/giao-dien 1` đến `/giao-dien 10`, hoặc gõ tên như `/giao-dien dai-duong`. Gõ `/giao-dien` không kèm gì để xem danh sách. Cảnh đã chọn được nhớ cho các phiên sau.
 - Pháo hoa pixel tự bắn khi Claude chạy `git commit`, `git push`, `git merge` hoặc `gh pr merge` thành công, khi Claude làm xong một việc dài trên 1 phút, và khi bạn bấm vào chỗ trống trên nền.
 - Trên app desktop, rê chuột qua nền để thấy vệt chấm sáng đi theo.
 

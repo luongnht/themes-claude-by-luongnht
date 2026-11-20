@@ -9,7 +9,7 @@ const BACKDROP = (scene: string) =>
     props: { scene, plugin: 'phong-canh' },
   }) as const
 
-const SCENES = ['hoang-hon', 'rung-thong', 'synthwave', 'dai-duong', 'cuc-quang']
+const SCENES = ['hoang-hon', 'rung-thong', 'synthwave', 'dai-duong', 'cuc-quang', 'bau-troi', 'thanh-pho', 'hoa-anh-dao', 'mua-thu', 'vu-tru']
 
 const engine = (on: any, toasts: string[], looks: string[]) => {
   on('command.register', (_: unknown, e: { name: string }) => ({ value: { command: e.name } }))

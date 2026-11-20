@@ -1,0 +1,5 @@
+{
+  "name": "themes-claude-by-luongnht",
+  "owner": { "name": "luongnht" },
+  "plugins": [{ "name": "phong-canh", "source": "./" }]
+}

@@ -41,7 +41,7 @@ test('every look paints, and the first session starts on the dusk', async ($, on
   expect(looks).toEqual(['hoang-hon'])
 })
 
-test('each scene draws a Shader over an Svg small enough to send', async ($, on) => {
+test('each scene draws a plain Svg small enough to send', async ($, on) => {
   engine(on, [], [])
 
   for (const scene of SCENES) {
@@ -49,7 +49,7 @@ test('each scene draws a Shader over an Svg small enough to send', async ($, on)
     const svg = await ui.find({ type: 'Svg' } as any)
     const source = String((svg as any)?.props?.source ?? '')
 
-    expect(await ui.find({ type: 'Shader' } as any)).toBeDefined()
+    expect(await ui.find({ type: 'Shader' } as any)).toBeUndefined()
     expect(source.startsWith('<svg')).toBe(true)
     expect(source.length < 131072).toBe(true)
     await ui.unmount()
@@ -67,16 +67,4 @@ test('/giao-dien lists the looks and switches by number', async ($, on) => {
 
   expect(String(done.text)).toContain('Đại dương')
   expect(looks).toEqual(['dai-duong'])
-})
-
-test('a commit sets off fireworks on the scene', async ($, on) => {
-  engine(on, [], [])
-  on('tool.call', () => ({ result: {} }))
-  await $.tool.call({ tool: 'Bash', command: 'git commit -m "x"' } as any)
-
-  const ui = await $.ui.mount(BACKDROP('dai-duong') as any)
-  const svg = await ui.find({ type: 'Svg' } as any)
-
-  expect(String((svg as any)?.props?.source)).toContain('fw-s')
-  await ui.unmount()
 })

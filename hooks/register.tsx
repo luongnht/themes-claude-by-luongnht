@@ -1,16 +1,8 @@
-import { atom, read, update } from 'claude-code'
 import type { EngineInterface, Hook, Register } from 'claude-code'
 
-import type { Burst } from '../types'
-import { burstMs, fireworks } from './fireworks'
 import { DEFAULT_LOOK, findLook, LOOKS } from './themes'
 
 const STORE_KEY = 'look'
-const burstAtom = atom({ plugin: 'phong-canh', key: 'burst' } as const, null, { shape: 'burst-1' })
-
-const MERGE = /\b(gh\s+pr\s+merge|git\s+merge|git\s+push)\b/
-const COMMIT = /\bgit\s+commit\b/
-const LONG_TURN_MS = 60_000
 
 const listing = (current: string) =>
   LOOKS.map((one, i) => `${i + 1}. ${one.id === current ? '▸ ' : ''}${one.name} (${one.id}): ${one.hint}`).join('\n')
@@ -26,16 +18,6 @@ const apply = async ($: EngineInterface, id: string) => {
   if (!set.isDrawn) {
     $.ui.status(set.reason)
   }
-}
-
-const launch = async ($: EngineInterface, kind: Burst['kind'], x = 0.5, y = 0.3) => {
-  const id = await $.clock.now()
-  const burst: Burst = { id, kind, x, y }
-
-  await update($, burstAtom, () => burst)
-  $.clock.after(burstMs(burst), async () => {
-    await update($, burstAtom, held => (held?.id === id ? null : held))
-  })
 }
 
 const switchLook: Hook<'command.run'> = async ($, e) => {
@@ -82,38 +64,6 @@ export const register: Register = on => {
 
   on('command.run', { command: 'giao-dien' }, switchLook)
 
-  // Commits and merges set off fireworks once they have run cleanly.
-  on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
-    const ran = await next(e)
-
-    if (ran.deny === undefined && ran.isError !== true) {
-      const kind = MERGE.test(e.command) ? 'merge' : COMMIT.test(e.command) ? 'commit' : undefined
-
-      // Fireworks never stand in the way of the tool's own result.
-      if (kind !== undefined) {
-        await launch($, kind).catch(() => undefined)
-      }
-    }
-
-    return ran
-  })
-
-  // A long piece of work, finished: a single burst.
-  on('turn.complete', async ($, e, next) => {
-    if (e.agentId === undefined && e.reason === 'answer' && e.durationMs >= LONG_TURN_MS) {
-      await launch($, 'small')
-    }
-
-    return next(e)
-  })
-
-  // A click on the bare backdrop sets one off where it landed.
-  on('ui.pointer', async ($, e, next) => {
-    await launch($, 'click', e.x, e.y)
-
-    return next(e)
-  })
-
   on('ui.render', { component: 'Backdrop' }, async ($, e, next) => {
     if (e.surface !== 'desktop' && e.surface !== 'mobile') {
       return next(e)
@@ -123,14 +73,8 @@ export const register: Register = on => {
     if (chosen === undefined) {
       return next(e)
     }
-    const { Shader, Svg } = $.ui.resolve(e)
-    const burst = await read($, burstAtom)
-    const source = burst === null ? chosen.scene : chosen.scene.replace(/<\/svg>$/, `${fireworks(burst)}</svg>`)
+    const { Svg } = $.ui.resolve(e)
 
-    return (
-      <Shader module="./ripple.ts" values={chosen.tint}>
-        <Svg source={source} alt={chosen.alt} isInteractive />
-      </Shader>
-    )
+    return <Svg source={chosen.scene} alt={chosen.alt} />
   })
 }

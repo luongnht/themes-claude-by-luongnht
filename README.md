@@ -36,7 +36,5 @@ Trong app desktop (nơi `/plugin` không chạy): bấm dấu + cạnh ô nhập
 ## Cách dùng
 
 - Đổi cảnh: `/giao-dien 1` đến `/giao-dien 10`, hoặc gõ tên như `/giao-dien dai-duong`. Gõ `/giao-dien` không kèm gì để xem danh sách. Cảnh đã chọn được nhớ cho các phiên sau.
-- Pháo hoa pixel tự bắn khi Claude chạy `git commit`, `git push`, `git merge` hoặc `gh pr merge` thành công, khi Claude làm xong một việc dài trên 1 phút, và khi bạn bấm vào chỗ trống trên nền.
-- Trên app desktop, rê chuột qua nền để thấy vệt chấm sáng đi theo.
 
 Cảnh nền chỉ hiện trên app desktop và mobile, không hiện trong terminal. Khi bật chế độ giảm chuyển động của hệ điều hành, cảnh đứng yên.

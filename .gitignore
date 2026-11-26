@@ -1,0 +1,11 @@
+# macOS, Google Drive
+.DS_Store
+Icon?
+
+# Bản đóng gói .zip (đính kèm lên GitHub Releases, không đưa vào repo)
+dist/
+
+# Kiểu do Claude Code sinh khi chạy test
+.claude-plugin/types/
+
+node_modules/
